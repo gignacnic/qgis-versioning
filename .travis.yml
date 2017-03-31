@@ -10,4 +10,4 @@ before_script:
   - python package.py -i
 
 script:
-  - PYTHONPATH=~/.qgis2/python/plugins python -m qgis_versioning.test || PYTHONPATH=~/.qgis2/python/plugins python -m qgis_versioning.test -v
+- PYTHONPATH=~/.qgis2/python/plugins:/usr/lib/python2.7/dist-packages python -m qgis_versioning.test || PYTHONPATH=~/.qgis2/python/plugins python -m qgis_versioning.test -v
