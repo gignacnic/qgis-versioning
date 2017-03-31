@@ -2,6 +2,8 @@ dist: trusty
 
 before_install:
   - sudo apt-get install -y postgresql postgis gdal-bin qgis python-pyspatialite python-psycopg2
+  - sudo updatedb
+  - locate pyspatialite
 
 before_script:
   - python package.py -i
