@@ -6,7 +6,7 @@ import psycopg2
 import os
 
 if __name__ == "__main__":
-    tmp_dir = "/tmp"
+    tmp_dir = tempfile.gettempdir()
     test_data_dir = os.path.dirname(os.path.realpath(__file__))
 
     sqlite_test_filename1 = tmp_dir+"/versioning_base_test1.sqlite"
