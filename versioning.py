@@ -742,7 +742,7 @@ def update(sqlite_filename, pg_conn_info):
                     scur.execute(
                         """SELECT RecoverGeometryColumn(
                         '{table}_conflicts', '{geom_name}', 
-                        {srid}, {geom_type}, 'XY')
+                        {srid}, '{geom_type}', 'XY')
                         """.format(table=table, srid=srid, geom_type=geom_type, geom_name=geom_name))
 
 
