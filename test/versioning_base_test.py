@@ -4,6 +4,7 @@ from .. import versioning
 from pyspatialite import dbapi2
 import psycopg2
 import os
+import tempfile
 
 if __name__ == "__main__":
     tmp_dir = tempfile.gettempdir()

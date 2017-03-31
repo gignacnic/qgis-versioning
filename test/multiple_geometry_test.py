@@ -4,6 +4,7 @@ from pyspatialite import dbapi2
 import psycopg2
 import os
 import shutil
+import tempfile
 
 if __name__ == "__main__":
     test_data_dir = os.path.dirname(os.path.realpath(__file__))
