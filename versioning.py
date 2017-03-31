@@ -162,6 +162,7 @@ class Db(object):
             self.log.write(sql+';\n')
         try:
             self.cur.execute( sql )
+            return self.cur
         except Exception as e:
             sys.stderr.write(traceback.format_exc())
             sys.stderr.write("\n sql: {}\n\n".format(sql))
@@ -934,17 +935,15 @@ def commit(sqlite_filename, commit_msg, pg_conn_info,commit_pg_user = ''):
                 table+"_diff",
                 '-nln', diff_schema+'.'+table+"_diff"]
         geoms = pg_geoms( pcur, table_schema, table )
-        if gdal_version[0] < 2:
-            if pgeom:
-                cmd.insert(5, '-lco')
-                cmd.insert(6, 'GEOMETRY_NAME='+pgeom)
-        #else:
-        #    for g in pg_geoms( pcur, table_schema, table ):
-        #        cmd.insert(5, '-lco')
-        #        cmd.insert(6, 'GEOMETRY_NAME='+g)
+        if gdal_version[0] < 2 or len(pg_geoms( pcur, table_schema, table ))==1:
+            cmd.insert(5, '-lco')
+            cmd.insert(6, 'GEOMETRY_NAME='+pgeom)
 
         print ' '.join(cmd)
         os.system(' '.join(cmd))
+
+        for l in pcur.execute( "select * from geometry_columns").fetchall():
+            print l
 
         # remove dif table and geometry column
         scur.execute("DELETE FROM geometry_columns "
