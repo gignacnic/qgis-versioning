@@ -472,7 +472,6 @@ def checkout(pg_conn_info, pg_table_names, sqlite_filename, selected_feature_lis
         scur.commit()
         scur.close()
     # Remove temp views after sqlite file is written
-    if feature_list:
         for i in temp_view_names:
             del_view_str = "DROP VIEW IF EXISTS " + i
             pcur.execute(del_view_str)
